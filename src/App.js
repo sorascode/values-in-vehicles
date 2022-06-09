@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import {Component} from "react";
+import {VehicleRenderer} from "./vehicle-renderer/vehicle-renderer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+   constructor(props) {
+       super(props);
+       this.state = {text: ""};
+   }
+
+    textChange = (e) => {
+        this.setState({ text: e.target.value });
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Values in Vehicles</h1>
+                <p>
+                    {"Vehicles sourced from "}
+                    <a href="https://www.asciiart.eu/">
+                        https://www.asciiart.eu/
+                    </a>
+                </p>
+                <input type="text" placeholder="enter text here" onChange={this.textChange}/>
+                <VehicleRenderer text={this.state.text}/>
+            </div>
+        );
+    }
 }
 
 export default App;
