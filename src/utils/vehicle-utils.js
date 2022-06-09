@@ -1,4 +1,4 @@
-export const splitChar = '#';
+export const splitChar = '█';
 
 export function renderVehicle(vehicle, text) {
   if (vehicle === undefined) {
@@ -7,27 +7,68 @@ export function renderVehicle(vehicle, text) {
 
   const startArea = vehicle.indexOf(splitChar);
   if (startArea === -1) {
-    return text;
+    return vehicle;
   }
 
   const endArea = vehicle.indexOf(splitChar, startArea + 1);
-  const middle = startArea + (endArea - startArea) / 2 + 1;
+  const middle = (endArea + startArea) / 2 + 1;
+  const textArea = endArea - startArea + 1;
 
-  const cleanedVehicle = vehicle.replaceAll(splitChar, ' ');
+  const validText = text.trim();
 
-  const textSpan = text.length / 2;
+  let textLength = validText.length;
+  if (validText.length > textArea) {
+    textLength = validText.lastIndexOf(' ', textArea);
+    if (textLength === -1) {
+      textLength = textArea;
+    }
+  }
+  const textSpan = textLength / 2;
 
   const startSplit = middle - textSpan;
   const endSplit = middle + textSpan;
 
+  const cleanedVehicle = vehicle.replace(splitChar, ' ').replace(splitChar, ' ');
+
   const startString = cleanedVehicle.substring(0, startSplit);
   const endString = cleanedVehicle.substring(endSplit);
 
-  return startString + text + endString;
+  const interpolatedVehicle = startString + validText.substring(0, textLength) + endString;
+
+  return renderVehicle(interpolatedVehicle, validText.substring(textLength));
 }
 
 export function getAreaSize(vehicle) {
   const startArea = vehicle.indexOf(splitChar);
+  if (startArea === -1) {
+    return 0;
+  }
   const endArea = vehicle.indexOf(splitChar, startArea + 1);
-  return endArea - startArea + 1;
+  if (endArea === -1) {
+    return 0;
+  }
+  const cleanedVehicle = vehicle.replace(splitChar, ' ').replace(splitChar, ' ');
+  return endArea - startArea + 1 + getAreaSize(cleanedVehicle);
+}
+
+export function canFitText(vehicle, text) {
+  const startArea = vehicle.indexOf(splitChar);
+  if (startArea === -1) {
+    return text.length === 0;
+  }
+  const endArea = vehicle.indexOf(splitChar, startArea + 1);
+  if (endArea === -1) {
+    return text.length === 0;
+  }
+  const textArea = endArea - startArea + 1;
+  if (textArea >= text.length) {
+    return true;
+  }
+  const validText = text.trim();
+  let accommodatedLength = validText.lastIndexOf(' ', textArea);
+  if (accommodatedLength === -1) {
+    accommodatedLength = textArea;
+  }
+  const cleanedVehicle = vehicle.replace(splitChar, ' ').replace(splitChar, ' ');
+  return canFitText(cleanedVehicle, text.substring(accommodatedLength));
 }

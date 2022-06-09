@@ -1,6 +1,6 @@
 import './vehicle-renderer.scss';
 import { Component } from 'react';
-import { renderVehicle } from '../utils/vehicle-utils';
+import { canFitText, renderVehicle } from '../utils/vehicle-utils';
 import { getSortedVehicles } from './vehicles-loader';
 
 export class VehicleRenderer extends Component {
@@ -19,9 +19,9 @@ export class VehicleRenderer extends Component {
     if (this.state.vehicles === undefined || this.state.vehicles.length === 0) {
       return undefined;
     }
-    const minCar = this.state.vehicles.find((vehicle) => vehicle.length >= this.props.text.length);
+    const minCar = this.state.vehicles.find((vehicle) => canFitText(vehicle.text, this.props.text));
     if (minCar === undefined) {
-      return undefined;
+      return this.state.vehicles[this.state.vehicles.length - 1].text;
     }
     return minCar.text;
   }

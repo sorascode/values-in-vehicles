@@ -7,6 +7,7 @@ export function getSortedVehicles() {
     .then((text) => {
       const seperatedVehicle = text.split(/(\r?\n){3}/);
       return seperatedVehicle
+        .map((vehicle) => vehicle.replaceAll('#', '█'))
         .map((vehicle) => ({ text: vehicle, length: getAreaSize(vehicle) }))
         .sort((vehicle) => vehicle.length);
     });
