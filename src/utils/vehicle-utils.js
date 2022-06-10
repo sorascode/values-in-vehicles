@@ -53,22 +53,22 @@ export function getAreaSize(vehicle) {
 
 export function canFitText(vehicle, text) {
   const startArea = vehicle.indexOf(splitChar);
+  const validText = text.trim();
   if (startArea === -1) {
-    return text.length === 0;
+    return validText.length === 0;
   }
   const endArea = vehicle.indexOf(splitChar, startArea + 1);
   if (endArea === -1) {
-    return text.length === 0;
+    return validText.length === 0;
   }
   const textArea = endArea - startArea + 1;
-  if (textArea >= text.length) {
+  if (textArea >= validText.length) {
     return true;
   }
-  const validText = text.trim();
   let accommodatedLength = validText.lastIndexOf(' ', textArea);
   if (accommodatedLength === -1) {
     accommodatedLength = textArea;
   }
   const cleanedVehicle = vehicle.replace(splitChar, ' ').replace(splitChar, ' ');
-  return canFitText(cleanedVehicle, text.substring(accommodatedLength));
+  return canFitText(cleanedVehicle, validText.substring(accommodatedLength));
 }
