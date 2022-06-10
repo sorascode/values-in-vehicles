@@ -7,6 +7,16 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <footer>
+      Also check out{' '}
+      <a href="https://text-in-train.vercel.app/" target="_blank" rel="noopener noreferrer">
+        Text in Train
+      </a>{' '}
+      and{' '}
+      <a href="https://string-in-ships.vercel.app/" target="_blank" rel="noopener noreferrer">
+        String in Ship
+      </a>
+    </footer>
   </React.StrictMode>,
   document.getElementById('root')
 );

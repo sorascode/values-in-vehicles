@@ -17,8 +17,10 @@ class App extends Component {
       <div>
         <h1>Values in Vehicles</h1>
         <p>
-          {'Vehicles sourced from '}
-          <a href="https://www.asciiart.eu/vehicles">https://www.asciiart.eu/vehicles</a>
+          Vehicles sourced from{' '}
+          <a href="https://www.asciiart.eu/vehicles" target="_blank" rel="noopener noreferrer">
+            https://www.asciiart.eu/vehicles
+          </a>
         </p>
         <input type="text" placeholder="enter text here" onChange={this.textChange} />
         <VehicleRenderer text={this.state.text} />
