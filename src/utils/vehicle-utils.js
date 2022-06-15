@@ -20,7 +20,7 @@ export function renderVehicle(vehicle, text) {
   if (validText.length > textArea) {
     textLength = validText.lastIndexOf(' ', textArea);
     if (textLength === -1) {
-      textLength = textArea;
+      textLength = 0;
     }
   }
   const textSpan = textLength / 2;
@@ -67,7 +67,7 @@ export function canFitText(vehicle, text) {
   }
   let accommodatedLength = validText.lastIndexOf(' ', textArea);
   if (accommodatedLength === -1) {
-    accommodatedLength = textArea;
+    accommodatedLength = 0;
   }
   const cleanedVehicle = vehicle.replace(splitChar, ' ').replace(splitChar, ' ');
   return canFitText(cleanedVehicle, validText.substring(accommodatedLength));
