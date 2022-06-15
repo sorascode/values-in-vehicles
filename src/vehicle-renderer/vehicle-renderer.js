@@ -28,13 +28,10 @@ export class VehicleRenderer extends Component {
 
   copyToClipboard = () => {
     const text = renderVehicle(this.chooseCar(), this.props.text);
-    function listener(e) {
-      e.clipboardData.setData('text/html', '<pre>' + text + '</pre>');
-      e.preventDefault();
-    }
-    document.addEventListener('copy', listener);
-    document.execCommand('copy');
-    document.removeEventListener('copy', listener);
+    const type = 'text/html';
+    const blob = new Blob(['<pre>' + text + '</pre>'], { type });
+    const data = [new window.ClipboardItem({ [type]: blob })];
+    navigator.clipboard.write(data);
   };
 
   render() {
