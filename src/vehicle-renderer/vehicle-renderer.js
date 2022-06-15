@@ -27,12 +27,21 @@ export class VehicleRenderer extends Component {
   }
 
   copyToClipboard = () => {
-    navigator.clipboard.writeText(renderVehicle(this.chooseCar(), this.props.text));
+    const text = renderVehicle(this.chooseCar(), this.props.text);
+    function listener(e) {
+      e.clipboardData.setData('text/html', '<pre>' + text + '</pre>');
+      e.preventDefault();
+    }
+    document.addEventListener('copy', listener);
+    document.execCommand('copy');
+    document.removeEventListener('copy', listener);
   };
 
   render() {
     return (
-      <pre onClick={this.copyToClipboard}>{renderVehicle(this.chooseCar(), this.props.text)}</pre>
+      <pre onClick={this.copyToClipboard} title="Click to copy!">
+        {renderVehicle(this.chooseCar(), this.props.text)}
+      </pre>
     );
   }
 }
