@@ -11,10 +11,14 @@ ReactDOM.render(
       Also check out{' '}
       <a href="https://text-in-train.vercel.app/" target="_blank" rel="noopener noreferrer">
         Text in Train
-      </a>{' '}
-      and{' '}
+      </a>
+      ,{' '}
       <a href="https://string-in-ships.vercel.app/" target="_blank" rel="noopener noreferrer">
         String in Ship
+      </a>{' '}
+      and{' '}
+      <a href="https://chars-in-church.vercel.app/" target="_blank" rel="noopener noreferrer">
+        Chars in Church
       </a>
     </footer>
   </React.StrictMode>,
