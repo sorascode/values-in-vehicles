@@ -15,6 +15,13 @@ export class VehicleRenderer extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    document.getElementById('vehicle-output').innerHTML = renderVehicle(
+      this.chooseCar(),
+      this.props.text
+    );
+  }
+
   chooseCar() {
     if (this.state.vehicles === undefined || this.state.vehicles.length === 0) {
       return undefined;
@@ -35,10 +42,6 @@ export class VehicleRenderer extends Component {
   };
 
   render() {
-    return (
-      <pre onClick={this.copyToClipboard} title="Click to copy!">
-        {renderVehicle(this.chooseCar(), this.props.text)}
-      </pre>
-    );
+    return <pre onClick={this.copyToClipboard} title="Click to copy!" id="vehicle-output"></pre>;
   }
 }
