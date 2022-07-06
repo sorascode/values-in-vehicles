@@ -15,12 +15,12 @@ ReactDOM.render(
       ,{' '}
       <a href="https://string-in-ships.vercel.app/" target="_blank" rel="noopener noreferrer">
         String in Ship
-      </a>{' '}
+      </a>
       ,{' '}
       <a href="https://chars-in-church.vercel.app/" target="_blank" rel="noopener noreferrer">
         Chars in Church
       </a>
-      and{' '}
+      {' '}and{' '}
       <a href="https://char-in-chart.vercel.app/" target="_blank" rel="noopener noreferrer">
         Char in Chart
       </a>
